@@ -4,7 +4,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Text;
 
-namespace R3.Helpers
+namespace R3.Service
 {
     public class DetailsSender
     {

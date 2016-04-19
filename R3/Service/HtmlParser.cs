@@ -1,6 +1,6 @@
 ﻿using HtmlAgilityPack;
 
-namespace R3.Helpers
+namespace R3.Service
 {
     public class HtmlParser
     {

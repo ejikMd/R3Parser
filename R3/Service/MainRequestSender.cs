@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace R3.Helpers
+namespace R3.Service
 {
     public class MainRequestSender
     {
