@@ -177,6 +177,7 @@
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\R3.somee.com.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\app\ApplicationController.js" />
