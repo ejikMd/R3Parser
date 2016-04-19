@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div ng-controller="MainListingController">
+
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th nowrap ng-click="sortType = 'PriceCoefficient'; sortReverse = !sortReverse" style="text-align: center">PriceCoefficient<span ng-show="sortType == 'PriceCoefficient' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'PriceCoefficient' && sortReverse" class="caret"></span>
+                </th>
+                @*		<th nowrap>MlsId</th>*@
+                <th nowrap ng-click="sortType = 'Price'; sortReverse = !sortReverse" style="text-align: center">Price<span ng-show="sortType == 'Price' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Price' && sortReverse" class="caret"></span>
+                </th>
+                <th ng-click="sortType = 'YearBuild'; sortReverse = !sortReverse" style="width: 100px; text-align: center">YearBuild<span ng-show="sortType == 'YearBuild' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'YearBuild' && sortReverse" class="caret"></span>
+                </th>
+                <th nowrap ng-click="sortType = 'NeighbourhoodName'; sortReverse = !sortReverse" style="text-align: center">NeighbourhoodName<span ng-show="sortType == 'NeighbourhoodName' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'NeighbourhoodName' && sortReverse" class="caret"></span>
+                </th>
+                <th nowrap ng-click="sortType = 'Bedrooms'; sortReverse = !sortReverse" style="text-align: center">Bedrooms<span ng-show="sortType == 'Bedrooms' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Bedrooms' && sortReverse" class="caret"></span>
+                </th>
+                <th nowrap ng-click="sortType = 'Bathrooms'; sortReverse = !sortReverse" style="text-align: center">Bathrooms<span ng-show="sortType == 'Bathrooms' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Bathrooms' && sortReverse" class="caret"></span>
+                </th>
+                <th nowrap ng-click="sortType = 'Type'; sortReverse = !sortReverse" style="text-align: center">Type<span ng-show="sortType == 'Type' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Type' && sortReverse" class="caret"></span>
+                </th>
+                <th style="text-align: center">ParkingType</th>
+                <th style="text-align: center">Address</th>
+                <th style="text-align: center">Description</th>
+                <th colspan="2" style="text-align: center">Links</th>
+                <th style="text-align: center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="13"></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div ng-repeat="realEstate in listOfRealEstates | orderBy:sortType:sortReverse " class="repeated-item row">
+
+        <div class="col-lg-4">
+            <div class="row">
+                <div class="col-lg-1">{{realEstate.PriceCoefficient}}<span ng-show="realEstate.IsNew == true" class="glyphicon glyphicon-plus"></span></div>
+                <div class="col-lg-2">{{realEstate.Price}}</div>
+                <div class="col-lg-1">{{realEstate.YearBuild}}</div>
+                <div class="col-lg-3">{{realEstate.NeighbourhoodName}}</div>
+                <div class="col-lg-1">{{realEstate.Bedrooms}}</div>
+                <div class="col-lg-1">{{realEstate.Bathrooms}}</div>
+                <div class="col-lg-1">{{realEstate.Type}}</div>
+                <div class="col-lg-2">{{realEstate.ParkingType}}</div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-3">{{realEstate.AddressText}}</div>
+                <div class="col-lg-5">{{realEstate.PublicRemarks}}</div>
+                <div class="col-lg-2">
+                    <a ng-href="{{realEstate.RelativeDetailsURL}}" target="_blank">Realtor</a>&nbsp;<a ng-href="{{realEstate.AlternateURL}}" target="_blank">More&nbsp;info</a>
+                </div>
+                <div class="col-lg-2">
+                    <div class="btn-group btn-group-justified">
+                        <label class="btn btn-success btn-xs" ng-click="sendSatus(realEstate, 'Yes');">Yes</label>
+                        <label class="btn btn-danger btn-xs" ng-click="sendSatus(realEstate, 'No');">No</label>
+                        <label class="btn btn-warning btn-xs" ng-click="sendSatus(realEstate, 'Maybe');">Maybe</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/app/MainListingController.js"></script>
+
+@Html.ActionLink("CollectData", "CollectData", "Home")

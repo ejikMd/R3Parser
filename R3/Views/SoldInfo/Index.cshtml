@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Sold Houses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@ViewBag.Message
+
+<div ng-controller="SoldRealEstatesController">
+
+    <table class="table table-bordered table-striped">
+	    <thead>
+	    <tr>
+	        <th nowrap ng-click="sortType = 'SoldDate'; sortReverse = !sortReverse" style="text-align: center">
+	            SoldDate<span ng-show="sortType == 'SoldDate' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'SoldDate' && sortReverse" class="caret"></span>
+	        </th>
+	        <th nowrap ng-click="sortType = 'NeighbourhoodName'; sortReverse = !sortReverse" style="text-align: center">
+	            NeighbourhoodName<span ng-show="sortType == 'NeighbourhoodName' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'NeighbourhoodName' && sortReverse" class="caret"></span>
+	        </th>
+	        <th nowrap ng-click="sortType = 'Bedrooms'; sortReverse = !sortReverse" style="text-align: center">
+	            Bedrooms<span ng-show="sortType == 'Bedrooms' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Bedrooms' && sortReverse" class="caret"></span>
+	        </th>
+	        <th nowrap ng-click="sortType = 'Bathrooms'; sortReverse = !sortReverse" style="text-align: center">
+	            Bathrooms<span ng-show="sortType == 'Bathrooms' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Bathrooms' && sortReverse" class="caret"></span>
+	        </th>
+	        <th nowrap ng-click="sortType = 'Type'; sortReverse = !sortReverse" style="text-align: center">
+	            Type<span ng-show="sortType == 'Type' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Type' && sortReverse" class="caret"></span>
+	        </th>
+		    <th style="text-align: center">ParkingType</th>
+		    <th style="text-align: center">Address</th>
+		    <th style="text-align: center">Description</th>
+	        <th nowrap ng-click="sortType = 'Price'; sortReverse = !sortReverse" style="text-align: center">
+	            Price<span ng-show="sortType == 'Price' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Price' && sortReverse" class="caret"></span>
+	        </th>
+	        <th ng-click="sortType = 'YearBuild'; sortReverse = !sortReverse" style="width: 100px; text-align: center">
+	            YearBuild<span ng-show="sortType == 'YearBuild' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'YearBuild' && sortReverse" class="caret"></span>
+	        </th>
+		    <th colspan="2" style="text-align: center">Links</th>
+	    </tr>
+	    </thead>
+        <tbody>
+
+        <tr ng-repeat="realEstate in listOfSoldRealEstates | orderBy:sortType:sortReverse " class="repeated-item">
+
+            <td nowrap>{{::realEstate.SoldDate | mydate | date: 'yyyy-MM-dd'}}</td>
+            <td>{{::realEstate.NeighbourhoodName}}</td>
+            <td>{{::realEstate.Bedrooms}}</td>
+            <td>{{::realEstate.Bathrooms}}</td>
+            <td>{{::realEstate.Type}}</td>
+            <td>{{::realEstate.ParkingType}}</td>
+            <td>{{::realEstate.AddressText}}</td>
+            <td>{{::realEstate.PublicRemarks}}</td>
+            <td>{{::realEstate.Price}}</td>
+            <td>{{::realEstate.YearBuild}}</td>
+            <td><a ng-href="{{::realEstate.RelativeDetailsURL}}" target="_blank">Realtor</a></td>
+            <td><a ng-href="{{::realEstate.AlternateURL}}" target="_blank" ng-if="realEstate.AlternateURL">More&nbsp;info</a></td>
+        </tr>
+    
+    </tbody>
+    </table>
+
+
+
+</div>
+
+<script src="~/Scripts/app/SoldRealEstatesController.js"></script>
