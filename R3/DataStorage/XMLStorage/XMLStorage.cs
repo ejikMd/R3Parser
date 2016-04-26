@@ -8,7 +8,7 @@ namespace R3.DataStorage
 {
     public class XMLStorage
     {
-        readonly string Path = AppDomain.CurrentDomain.BaseDirectory + "\\SoldHouses.xml";
+        private readonly string Path = AppDomain.CurrentDomain.BaseDirectory + "\\SoldHouses.xml";
 
         readonly DataSet DataSet = new DataSet();
         readonly DataView DataView;

@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{B387017C-075
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLCleanup", "XMLCleanup\XMLCleanup.csproj", "{A52783B5-1E6B-479F-B748-02F5A053752D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{13222DBB-E4FC-43D3-9052-35B2711484DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{A52783B5-1E6B-479F-B748-02F5A053752D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A52783B5-1E6B-479F-B748-02F5A053752D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A52783B5-1E6B-479F-B748-02F5A053752D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13222DBB-E4FC-43D3-9052-35B2711484DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13222DBB-E4FC-43D3-9052-35B2711484DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13222DBB-E4FC-43D3-9052-35B2711484DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13222DBB-E4FC-43D3-9052-35B2711484DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

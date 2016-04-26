@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using R3.DataStorage.LiteDB;
 using R3.DataStorage.Tables;
 using R3.Models;
 using R3.Service;
@@ -12,21 +13,11 @@ namespace R3.DataStorage
     {
         private readonly DetailsSender getDetailsSender = new DetailsSender();
         private readonly HtmlParser htmlParser = new HtmlParser();
-        private readonly XMLStorage xmlStorage = new XMLStorage();
-
-        public List<RealEstate> GetAllRecordsWithoutConditions()
-        {
-            using (var db = new MainStorage())
-            {
-                var query = db.RealEstates;
-                return query.ToList();
-            }
-        }
 
 
         public List<RealEstate> GetAllRecords()
-        {
-            MoveSoldRealEstatesToXml();
+        {           
+            ArchiveSoldRealEstates();
 
             using (var db = new MainStorage())
             {
@@ -159,7 +150,7 @@ namespace R3.DataStorage
             }
         }
 
-        private void MoveSoldRealEstatesToXml()
+        private void ArchiveSoldRealEstates()
         {
             List<RealEstateSold> query;
             using (var db = new MainStorage())
@@ -170,7 +161,7 @@ namespace R3.DataStorage
             List<int> idList = new List<int>();
             foreach (var soldRealEstate in query)
             {
-                xmlStorage.Insert(soldRealEstate);
+                LiteDbStorage.Insert(soldRealEstate);
                 idList.Add(soldRealEstate.Id);
             }
 
@@ -259,7 +250,7 @@ namespace R3.DataStorage
                 result = db.SoldRealEstates.ToList();
             }
 
-            result.AddRange(xmlStorage.SelectAll());
+            result.AddRange(LiteDbStorage.SelectAll());
 
             return result;
         }
