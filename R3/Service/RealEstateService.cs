@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using R3.DataStorage;
+using R3.DataStorage.LiteDB;
 using R3.Models;
 
 namespace R3.Service
@@ -17,6 +18,7 @@ namespace R3.Service
             {
                 result.PriceCoefficient = 190* Convert.ToInt32("0" + result.YearBuild) - Convert.ToInt32(result.Price.Replace("$", "").Replace(",",""));
                 result.IsNew = historyRecords.ContainsKey(result.MlsNumber);
+                result.PriceChange = LiteDbStorage.Contains(result);
             }
         }
 

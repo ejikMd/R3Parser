@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using R3.DataStorage.LiteDB;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
 {
@@ -10,7 +8,6 @@ namespace UnitTests
         [TestMethod]
         public void TestMethod1()
         {
-            Class1 
         }
     }
 }

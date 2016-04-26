@@ -50,7 +50,10 @@
             <td>{{::realEstate.ParkingType}}</td>
             <td>{{::realEstate.AddressText}}</td>
             <td>{{::realEstate.PublicRemarks}}</td>
-            <td>{{::realEstate.PriceCoefficient}}<span ng-show="realEstate.IsNew == true" class="glyphicon glyphicon-envelope" style="color: red; font-size: 1.2em;">New</span></td>
+            <td>{{::realEstate.PriceCoefficient}}
+                <span ng-show="realEstate.IsNew == true" class="glyphicon glyphicon-envelope" style="color: red; font-size: 1.2em;">New</span>
+                <span ng-show="realEstate.PriceChange != 0" class="glyphicon glyphicon-pencil" style="color: red; font-size: 1.2em;">Price Change {{::realEstate.PriceChange}}</span>
+            </td>
 @*            <td>{{::realEstate.MlsId}}</td>*@
             <td>{{::realEstate.Price}}</td>
             <td>{{::realEstate.YearBuild}}</td>

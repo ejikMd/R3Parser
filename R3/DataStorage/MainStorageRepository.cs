@@ -25,18 +25,11 @@ namespace R3.DataStorage
      
                 var query = db.RealEstates.Where(x => !x.Status.Equals("No"))
                                         .Where(x => !x.Type.Equals("Appartment"))
-                                        .Where(x => x.DateTaken == maxValue)
-#if DEBUG
-                                        .Take(10)
-#endif
-                                        ;
+                                        .Where(x => x.DateTaken == maxValue);
 
                 return query.ToList();
             }
         }
-
-
-
 
         public void SaveData(List<Result> results)
         {
@@ -152,14 +145,14 @@ namespace R3.DataStorage
 
         private void ArchiveSoldRealEstates()
         {
-            List<RealEstateSold> query;
+            List<RealEstateSold> SoldRealEstates;
             using (var db = new MainStorage())
             {
-                query = db.SoldRealEstates.ToList();    
+                SoldRealEstates = db.SoldRealEstates.ToList();    
             }
 
             List<int> idList = new List<int>();
-            foreach (var soldRealEstate in query)
+            foreach (var soldRealEstate in SoldRealEstates)
             {
                 LiteDbStorage.Insert(soldRealEstate);
                 idList.Add(soldRealEstate.Id);
@@ -240,7 +233,6 @@ namespace R3.DataStorage
                        };
             }
         }
-
 
         public List<RealEstateSold> GetAllSoldRecords()
         {

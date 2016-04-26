@@ -24,5 +24,6 @@ namespace R3.Models
         public string Status { get; set; }
 
         public bool IsNew { get; set; }
+        public int PriceChange { get; set; }
     }
 }
