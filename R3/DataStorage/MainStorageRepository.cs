@@ -39,20 +39,20 @@ namespace R3.DataStorage
             {
                 var mlsId = result.Id; //Id	"15518630"	string
                 var mlsNumber = result.MlsNumber;//	"11568924"	string
-                var postalCode = result.PostalCode;//	"H9B1M1"	string
+                //var postalCode = result.PostalCode;//	"H9B1M1"	string
                 var bathroomTotal = Convert.ToInt32(result.Building.BathroomTotal);//	"1"	string
                 var bedrooms = Convert.ToInt32(result.Building.Bedrooms);//	"4"	string
-                var sizeExterior = result.Building.SizeExterior;//	null	string
-                var sizeInterior = result.Building.SizeInterior;//	"1 sqft"	string
-                var storiesTotal = result.Building.StoriesTotal;//	null	string
+                //var sizeExterior = result.Building.SizeExterior;//	null	string
+                //var sizeInterior = result.Building.SizeInterior;//	"1 sqft"	string
+                //var storiesTotal = result.Building.StoriesTotal;//	null	string
                 var type = result.Building.Type;//	"Apartment"	string
 
-                var sizeFrontage = result.Land.SizeFrontage;//	"1 ft"	string
-                var sizeTotal = result.Land.SizeTotal;//	"1.00X1.00"	string
+                //var sizeFrontage = result.Land.SizeFrontage;//	"1 ft"	string
+                //var sizeTotal = result.Land.SizeTotal;//	"1.00X1.00"	string
 
                 var addressText = result.Property.Address.AddressText;//	"451 Rue Hyman|Dollard-Des Ormeaux, Quebec H9B1M1"	string
-                var latitude = result.Property.Address.Latitude;//	"45.49336279"	string
-                var longitude = result.Property.Address.Longitude;//	"-73.79517093"	string
+                //var latitude = result.Property.Address.Latitude;//	"45.49336279"	string
+                //var longitude = result.Property.Address.Longitude;//	"-73.79517093"	string
 
                 var price = result.Property.Price;//	"$205,000"	string
                 //var Type = result.Property.Type;//	"Single Family"	string
@@ -145,14 +145,15 @@ namespace R3.DataStorage
 
         private void ArchiveSoldRealEstates()
         {
-            List<RealEstateSold> SoldRealEstates;
+            List<RealEstateSold> soldRealEstates;
             using (var db = new MainStorage())
             {
-                SoldRealEstates = db.SoldRealEstates.ToList();    
+                soldRealEstates = db.SoldRealEstates.ToList();    
             }
 
+            // ReSharper disable once CollectionNeverQueried.Local
             List<int> idList = new List<int>();
-            foreach (var soldRealEstate in SoldRealEstates)
+            foreach (var soldRealEstate in soldRealEstates)
             {
                 LiteDbStorage.Insert(soldRealEstate);
                 idList.Add(soldRealEstate.Id);
