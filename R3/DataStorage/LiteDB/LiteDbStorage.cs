@@ -11,15 +11,17 @@ namespace R3.DataStorage.LiteDB
     {
         private static readonly string Path = AppDomain.CurrentDomain.BaseDirectory + "\\SoldHouses.db";
 
-        public static void Insert(RealEstateSold realEstateSold)
+        public static bool Insert(RealEstateSold realEstateSold)
         {
             using (var db = new LiteDatabase(Path))
             {
                 var col = db.GetCollection<RealEstateSold>("soldHouses");
 
                 if (!col.Exists(x => x.Id.Equals(realEstateSold.Id)))
-                    col.Insert(realEstateSold);
+                    col.Insert(realEstateSold);                
             }
+
+            return true;
         }
                 
         public static List<RealEstateSold> SelectAll()
@@ -28,7 +30,7 @@ namespace R3.DataStorage.LiteDB
             {
                 var col = db.GetCollection<RealEstateSold>("soldHouses");
 
-                return col.FindAll().ToList();
+                return col.FindAll().OrderByDescending(x=>x.DateTaken).ToList();
             }
         }
 
@@ -36,9 +38,9 @@ namespace R3.DataStorage.LiteDB
         {
             using (var db = new LiteDatabase(Path))
             {
-                var col = db.GetCollection<RealEstateSold>("soldHouses");
+                var collection = db.GetCollection<RealEstateSold>("soldHouses");
 
-                var result = col.Find(x => x.AddressText.Equals(realEstate.AddressText)).OrderByDescending(x => x.DateTaken).FirstOrDefault();
+                var result = collection.Find(x => x.AddressText.Equals(realEstate.AddressText)).OrderByDescending(x => x.DateTaken).FirstOrDefault();
                 if (result != null)
                 {
                     try
@@ -54,7 +56,6 @@ namespace R3.DataStorage.LiteDB
                     }
                 }
 
-                //return col.Exists(x => x.AddressText.Equals(realEstate.AddressText) && x.Price != realEstate.Price);              
                 return 0;
             }
         }

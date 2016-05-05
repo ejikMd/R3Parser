@@ -151,13 +151,8 @@ namespace R3.DataStorage
                 soldRealEstates = db.SoldRealEstates.ToList();    
             }
 
-            // ReSharper disable once CollectionNeverQueried.Local
-            List<int> idList = new List<int>();
-            foreach (var soldRealEstate in soldRealEstates)
-            {
-                LiteDbStorage.Insert(soldRealEstate);
-                idList.Add(soldRealEstate.Id);
-            }
+            // ReSharper disable once UnusedVariable
+            List<int> idList = (from soldRealEstate in soldRealEstates where LiteDbStorage.Insert(soldRealEstate) select soldRealEstate.Id).ToList();
 
 #if !DEBUG
             using (var db = new MainStorage())
@@ -240,7 +235,7 @@ namespace R3.DataStorage
             List<RealEstateSold> result;
             using (var db = new MainStorage())
             {
-                result = db.SoldRealEstates.ToList();
+                result = db.SoldRealEstates.OrderByDescending(x=>x.DateTaken).ToList();
             }
 
             result.AddRange(LiteDbStorage.SelectAll());
