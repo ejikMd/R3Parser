@@ -133,7 +133,7 @@ namespace R3.DataStorage
                 db.Database.ExecuteSqlCommand(updateQuery);                
 
                 //archive records
-                updateQuery = "INSERT INTO RealEstateHistory (mlsNumber, dateTaken, status) SELECT mlsNumber, dateTaken, status FROM RealEstate WHERE dateTaken not in (select max(dateTaken) from RealEstate); " +
+                updateQuery = "INSERT INTO RealEstateHistory (mlsNumber, dateTaken, price, status) SELECT mlsNumber, dateTaken, price, status FROM RealEstate WHERE dateTaken not in (select max(dateTaken) from RealEstate); " +
                               "DELETE FROM RealEstate WHERE dateTaken not in (select max(dateTaken) from RealEstate);";
                 db.Database.ExecuteSqlCommand(updateQuery);
 

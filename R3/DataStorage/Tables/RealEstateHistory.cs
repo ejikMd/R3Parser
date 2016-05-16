@@ -6,6 +6,7 @@ namespace R3.DataStorage.Tables
     {
         public DateTime DateTaken { get; set; }
         public string MlsNumber { get; set; }
+        public string Price { get; set; }
         public string Status { get; set; }
     }
 }

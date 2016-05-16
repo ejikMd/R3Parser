@@ -12,6 +12,7 @@ namespace R3.DataStorage.Tables
 
             Property(p => p.DateTaken).HasColumnName("dateTaken");
             Property(p => p.MlsNumber).HasColumnName("mlsNumber");
+            Property(p => p.Price).HasColumnName("Price");
             Property(p => p.Status).HasColumnName("Status");
         }
     }
