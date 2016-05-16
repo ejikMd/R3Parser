@@ -184,6 +184,7 @@
     <Content Include="ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\R3.somee.com.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Scripts\app\ApplicationController.js" />
     <Content Include="Scripts\app\SoldRealEstatesController.js" />
     <Content Include="Scripts\libs\angular-animate.js" />

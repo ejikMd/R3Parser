@@ -20,14 +20,18 @@
    
     function getAllRecords() {
 
+        //document.getElementById("loaing").style.display = 'block';
+
         mainListingService.getAllRecords()
             .success(function (listOfRealEstates) {
+                document.getElementById("loading").style.display = 'none';
                 $scope.listOfRealEstates = listOfRealEstates;
-                console.log($scope.listOfRealEstates);
+                //console.log($scope.listOfRealEstates);
             })
             .error(function (error) {
+                document.getElementById("loading").style.display = 'none';
                 $scope.status = 'Unable to load customer data: ' + error.message;
-                console.log($scope.status);
+                //console.log($scope.status);
             });
     }
 

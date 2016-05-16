@@ -89,3 +89,19 @@ footer {
 .repeated-item.ng-leave.ng-leave-active {
   opacity:0;
 }
+
+
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: #c0c0c0;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url("../images/ajax-loader.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}

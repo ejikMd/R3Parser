@@ -6,12 +6,14 @@
 
         soldListingService.getAllSoldRecords()
             .success(function (listOfSoldRealEstates) {
+                document.getElementById("loading").style.display = 'none';
                 $scope.listOfSoldRealEstates = listOfSoldRealEstates;
-                console.log($scope.listOfSoldRealEstates);
+                //console.log($scope.listOfSoldRealEstates);
             })
             .error(function (error) {
+                document.getElementById("loading").style.display = 'none';
                 $scope.status = 'Unable to load customer data: ' + error.message;
-                console.log($scope.status);
+                //console.log($scope.status);
             });
     }
 

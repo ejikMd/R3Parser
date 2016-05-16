@@ -14,10 +14,12 @@
 
         accessLogsService.getAccessLogs()
             .success(function (accessLogs) {
+                document.getElementById("loading").style.display = 'none';
                 $scope.accessLogs = accessLogs;
                 console.log($scope.accessLogs);
             })
             .error(function (error) {
+                document.getElementById("loading").style.display = 'none';
                 $scope.status = 'Unable to load customer data: ' + error.message;
                 console.log($scope.status);
             });
