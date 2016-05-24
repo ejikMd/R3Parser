@@ -4,6 +4,8 @@
 
     function getAllRecords() {
 
+        document.getElementById("loaing").style.display = 'block';
+
         soldListingService.getAllSoldRecords()
             .success(function (listOfSoldRealEstates) {
                 document.getElementById("loading").style.display = 'none';

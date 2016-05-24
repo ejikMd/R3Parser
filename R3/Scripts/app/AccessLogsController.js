@@ -12,6 +12,8 @@
 
     function getAccessLogs() {
 
+        document.getElementById("loaing").style.display = 'block';
+
         accessLogsService.getAccessLogs()
             .success(function (accessLogs) {
                 document.getElementById("loading").style.display = 'none';
