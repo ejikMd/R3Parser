@@ -34,7 +34,7 @@ namespace R3.DataStorage.LiteDB
             }
         }
 
-        public static int Contains(RealEstateViewModel realEstate)
+        public static int GetPriceChangeFromArchive(RealEstateViewModel realEstate)
         {
             using (var db = new LiteDatabase(Path))
             {

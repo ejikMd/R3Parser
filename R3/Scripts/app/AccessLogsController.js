@@ -12,7 +12,7 @@
 
     function getAccessLogs() {
 
-        document.getElementById("loaing").style.display = 'block';
+        document.getElementById("loading").style.display = 'block';
 
         accessLogsService.getAccessLogs()
             .success(function (accessLogs) {

@@ -20,7 +20,7 @@
    
     function getAllRecords() {
 
-        document.getElementById("loaing").style.display = 'block';
+        document.getElementById("loading").style.display = 'block';
 
         mainListingService.getAllRecords()
             .success(function (listOfRealEstates) {

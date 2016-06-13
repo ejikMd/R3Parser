@@ -242,5 +242,50 @@ namespace R3.DataStorage
 
             return result;
         }
+
+        public Dictionary<string, int> GetPriceChangesFromHistory(List<RealEstateViewModel> results)
+        {
+            using (var db = new MainStorage())
+            {
+                var latestChanges1 = db.RealEstateHistories.ToList();
+
+                var latestChanges = latestChanges1
+                    .Where(x => results.Exists(c => c.MlsNumber.Equals(x.MlsNumber)))
+                    .Where(x => results.Exists(c => !c.Price.Equals(x.Price)))
+                    .GroupBy(g => g.MlsNumber)
+                    .Select(
+                         v =>
+                             new
+                             {
+                                 MlsNumber = v.Key,
+                                 DateTaken = v.Max(user => user.DateTaken)
+                             }).ToList();
+
+                var historyWithPrices = db.RealEstateHistories.ToList().Where(x => latestChanges.Exists(c => c.MlsNumber.Equals(x.MlsNumber) && c.DateTaken.Equals(x.DateTaken))).ToList();
+
+                var result = historyWithPrices
+                                                .Join(results, r => r.MlsNumber, h => h.MlsNumber,
+                                                (r, h) => new { r, h }
+                                                ).ToList()
+                                                .ToDictionary(kvp => kvp.r.MlsNumber, kvp => GetPriceDifference(kvp.h.Price, kvp.r.Price));
+
+                return result;
+            }
+        }
+
+        private int GetPriceDifference(string oldPrice, string newPrice)
+        {
+            try
+            {
+                var oldPriceInt = int.Parse(oldPrice.Replace("$", "").Replace(",", ""));
+                var newPriceInt = int.Parse(newPrice.Replace("$", "").Replace(",", ""));
+
+                return oldPriceInt - newPriceInt;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
     }
 }

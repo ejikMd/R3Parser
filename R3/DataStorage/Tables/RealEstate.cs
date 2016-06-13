@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace R3.DataStorage.Tables
 {
@@ -22,5 +23,7 @@ namespace R3.DataStorage.Tables
         public int PriceCoefficient { get; set; }
         public string Individuals { get; set; }
         public string Status { get; set; }
+
+        //public virtual ICollection<RealEstateHistory> RealEstateHistories { get; set; }
     }
 }
