@@ -35,21 +35,22 @@ namespace R3.Controllers
             return View();
         }
 
-
         public ActionResult CollectData()
         {
-
             var searchResult = mainRequestSender.SendPostRequest();
 
-            //analyzer.GetPriceValues(searchResult.Results);
-
-            mainStorageRepository.SaveData(searchResult.Results);
+            if (searchResult != null)
+                mainStorageRepository.SaveData(searchResult);
 
             ViewBag.Message = "Collect today's listing from web site";
 
             return View("Index");
         }
 
+        public ActionResult ShowMap()
+        {
+            return View("Map"); 
+        }
 
         public JsonResult GetAllRecords()
         {
@@ -85,7 +86,6 @@ namespace R3.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
 
         public JsonResult SetStatus(string index, string status)
         {

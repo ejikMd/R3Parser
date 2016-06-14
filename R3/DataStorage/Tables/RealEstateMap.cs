@@ -22,6 +22,8 @@ namespace R3.DataStorage.Tables
             Property(p => p.Type).HasColumnName("Type");
             Property(p => p.ParkingType).HasColumnName("ParkingType");
             Property(p => p.AddressText).HasColumnName("AddressText");
+            Property(p => p.Latitude).HasColumnName("Latitude");
+            Property(p => p.Longitude).HasColumnName("Longitude");
             Property(p => p.PublicRemarks).HasColumnName("PublicRemarks");
             Property(p => p.RelativeDetailsURL).HasColumnName("RelativeDetailsURL");
             Property(p => p.AlternateURL).HasColumnName("AlternateURL");

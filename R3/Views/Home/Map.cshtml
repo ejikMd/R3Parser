@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Map";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="MapController">
+
+    <div id="map" style="width: 100%; height: 800px;"></div>
+
+</div>
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src="~/Scripts/app/MapController.js"></script>

@@ -51,8 +51,8 @@ namespace R3.DataStorage
                 //var sizeTotal = result.Land.SizeTotal;//	"1.00X1.00"	string
 
                 var addressText = result.Property.Address.AddressText;//	"451 Rue Hyman|Dollard-Des Ormeaux, Quebec H9B1M1"	string
-                //var latitude = result.Property.Address.Latitude;//	"45.49336279"	string
-                //var longitude = result.Property.Address.Longitude;//	"-73.79517093"	string
+                var latitude = decimal.Parse(result.Property.Address.Latitude);//	"45.49336279"	string
+                var longitude = decimal.Parse(result.Property.Address.Longitude);//	"-73.79517093"	string
 
                 var price = result.Property.Price;//	"$205,000"	string
                 //var Type = result.Property.Type;//	"Single Family"	string
@@ -84,6 +84,8 @@ namespace R3.DataStorage
                                 Type = type,
                                 ParkingType = parkingType,
                                 AddressText = addressText,
+                                Latitude = latitude,
+                                Longitude = longitude,
                                 PublicRemarks = publicRemarks,
                                 RelativeDetailsURL = relativeDetailsURL,
                                 AlternateURL = alternateURL,

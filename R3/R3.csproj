@@ -186,6 +186,7 @@
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Scripts\app\ApplicationController.js" />
+    <Content Include="Scripts\app\MapController.js" />
     <Content Include="Scripts\app\SoldRealEstatesController.js" />
     <Content Include="Scripts\libs\angular-animate.js" />
     <Content Include="Scripts\libs\angular-animate.min.js" />
@@ -237,6 +238,7 @@
     <Content Include="Scripts\libs\angular-animate.min.js.map" />
     <Content Include="Views\Home\MainListingBootstrap.cshtml" />
     <Content Include="Views\SoldInfo\Index.cshtml" />
+    <Content Include="Views\Home\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

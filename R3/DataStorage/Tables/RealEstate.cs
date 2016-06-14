@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace R3.DataStorage.Tables
 {
@@ -17,6 +16,8 @@ namespace R3.DataStorage.Tables
         public string Type { get; set; }
         public string ParkingType { get; set; }
         public string AddressText { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
         public string PublicRemarks { get; set; }
         public string RelativeDetailsURL { get; set; }
         public string AlternateURL { get; set; }

@@ -157,3 +157,5 @@ $RECYCLE.BIN/
 
 # Db Connection file
 ConnectionStrings.config
+/R3/SoldHouses_old.xml
+/R3/SoldHouses.db

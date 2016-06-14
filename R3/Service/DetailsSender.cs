@@ -52,7 +52,6 @@ namespace R3.Service
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
-                request.KeepAlive = true;
                 request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
                 request.Headers.Add("Upgrade-Insecure-Requests", @"1");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36";
