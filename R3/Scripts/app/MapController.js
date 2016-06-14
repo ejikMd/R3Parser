@@ -10,6 +10,7 @@
             .success(function (listOfRealEstates) {
                 document.getElementById("loading").style.display = 'none';
                 $scope.listOfRealEstates = listOfRealEstates;
+                populateMarkers();
             })
             .error(function (error) {
                 document.getElementById("loading").style.display = 'none';
@@ -17,7 +18,22 @@
             });
     }
 
-    //getAllRecords();
+    function populateMarkers() {
+        //var array = [];
+
+        for (var i = 0; i < $scope.listOfRealEstates.length; i++) {
+            var item = $scope.listOfRealEstates[i];
+
+            //var marker = new L.marker([item.Latitude, item.Longitude]).bindPopup(item.Price).openPopup();
+
+            L.marker([item.Latitude, item.Longitude]).addTo(map).bindPopup(item.Price).openPopup();
+
+            //array.push(marker);
+        }
+
+        //markers.addLayers(array);
+    }
+
     var map = L.map('map').setView([45.4739896, -73.7513217], 13);
 
 
@@ -26,8 +42,7 @@
         subdomains: ['otile1', 'otile2', 'otile3', 'otile4']
     }).addTo(map);
 
-    L.marker([45.4739896, -73.7513217]).addTo(map)
-        .bindPopup("<b>Center</b><br/>Text").openPopup();
+    getAllRecords();
 
 });
 

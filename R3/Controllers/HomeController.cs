@@ -47,7 +47,7 @@ namespace R3.Controllers
             return View("Index");
         }
 
-        public ActionResult ShowMap()
+        public ActionResult Map()
         {
             return View("Map"); 
         }
@@ -68,6 +68,8 @@ namespace R3.Controllers
                 Type = x.Type,
                 ParkingType = x.ParkingType,
                 AddressText = x.AddressText,
+                Latitude = x.Latitude,
+                Longitude = x.Longitude,
                 PublicRemarks = x.PublicRemarks,
                 RelativeDetailsURL = x.RelativeDetailsURL,
                 AlternateURL = x.AlternateURL,

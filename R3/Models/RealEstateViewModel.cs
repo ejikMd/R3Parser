@@ -17,6 +17,8 @@ namespace R3.Models
         public string Type { get; set; }
         public string ParkingType { get; set; }
         public string AddressText { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
         public string PublicRemarks { get; set; }
         public string RelativeDetailsURL { get; set; }
         public string AlternateURL { get; set; }
