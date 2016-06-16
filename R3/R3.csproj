@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Filters\CustomActionFilter.cs" />
     <Compile Include="Models\ApplicationStatusViewModel.cs" />
+    <Content Include="Scripts\libs\leaflet.sprite.js" />
     <Compile Include="Service\HtmlParser.cs" />
     <Compile Include="Models\RealEstateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
