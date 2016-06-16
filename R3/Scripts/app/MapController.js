@@ -19,19 +19,22 @@
     }
 
     function populateMarkers() {
-        //var array = [];
 
         for (var i = 0; i < $scope.listOfRealEstates.length; i++) {
             var item = $scope.listOfRealEstates[i];
 
-            //var marker = new L.marker([item.Latitude, item.Longitude]).bindPopup(item.Price).openPopup();
+            var message = "<a href='" + item.RelativeDetailsURL + "' target='_blank'>" + item.Price + "</a>";
+            if (item.PriceChange !== 0)
+                message = message + "</br>" + item.PriceChange;
 
-            L.marker([item.Latitude, item.Longitude]).addTo(map).bindPopup(item.Price).openPopup();
+            var marker = L.marker([item.Latitude, item.Longitude]).bindPopup(message);
 
-            //array.push(marker);
+            marker.on('mouseover', function (evt) {
+                evt.target.openPopup();
+            });
+
+            marker.addTo(map);
         }
-
-        //markers.addLayers(array);
     }
 
     var map = L.map('map').setView([45.4739896, -73.7513217], 13);
