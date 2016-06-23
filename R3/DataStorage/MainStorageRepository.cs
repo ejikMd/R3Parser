@@ -66,10 +66,13 @@ namespace R3.DataStorage
                 if (result.AlternateURL != null && result.AlternateURL.DetailsLink != null)
                     alternateURL = result.AlternateURL.DetailsLink;
 
-                //var details = htmlParser.Parse(getDetailsSender.MakeRequests(relativeDetailsURL));
-                //var builtinValue = htmlParser.GetYear(details);
-                //var neighbourhoodName = htmlParser.GetNeighbourhoodName(details);
-                //var parkingType = htmlParser.GetParkingType(details);
+                if (false) //desabled because of detected bot activity by api
+                {
+                    var details = htmlParser.Parse(getDetailsSender.MakeRequests(relativeDetailsURL));
+                    //var builtinValue = htmlParser.GetYear(details);
+                    //var neighbourhoodName = htmlParser.GetNeighbourhoodName(details);
+                    //var parkingType = htmlParser.GetParkingType(details);
+                }
                 var builtinValue = "";
                 var neighbourhoodName = "";
                 var parkingType = "";
@@ -92,7 +95,7 @@ namespace R3.DataStorage
                                 PublicRemarks = publicRemarks,
                                 RelativeDetailsURL = relativeDetailsURL,
                                 AlternateURL = alternateURL,
-                                Individuals = individuals.Substring(0, 4000),
+                                Individuals = individuals.Length <= 4000 ? individuals : individuals.Substring(0, 4000),
                                 PriceCoefficient = 0
                              });
             }
@@ -109,9 +112,6 @@ namespace R3.DataStorage
                     db.RealEstates.Add(realEstate);
                 }
                 db.SaveChanges();
-
-                //var updateQuery = "UPDATE realestate SET STATUS = 'No' WHERE mlsId IN (SELECT DISTINCT mlsId FROM realestate WHERE STATUS = 'No') AND ISNULL(STATUS,'') <> 'No'";
-                //db.Database.SqlQuery<dynamic>(updateQuery);
 
                 //sync status
                 var updateQuery = "UPDATE T SET T.[status] = OT.[status] FROM realestate T INNER JOIN RealEstateHistory OT ON T.mlsNumber = OT.mlsNumber WHERE OT.[status] is not null AND T.[status] is null";

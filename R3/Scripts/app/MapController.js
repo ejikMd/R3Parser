@@ -29,9 +29,13 @@
 
             var markerIcon = L.spriteIcon();
             if (item.Status === "Maybe")
-                markerIcon = L.spriteIcon('orange');
+                markerIcon = L.spriteIcon('yellow');
             if (item.Status === "Yes")
                 markerIcon = L.spriteIcon('green');
+
+            if (item.IsNew === true || item.PriceChange !== 0)
+                markerIcon = L.spriteIcon('red');
+
 
             var marker = L.marker([item.Latitude, item.Longitude], { icon: markerIcon }).bindPopup(message);
 
@@ -43,7 +47,7 @@
         }
     }
 
-    var map = L.map('map').setView([45.4739896, -73.7513217], 13);
+    var map = L.map('map').setView([45.4656229, -73.837839], 14);
 
     L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright" title="OpenStreetMap" target="_blank">OpenStreetMap</a> contributors | Tiles Courtesy of <a href="http://www.mapquest.com/" title="MapQuest" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" width="16" height="16">',

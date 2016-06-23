@@ -20,7 +20,7 @@ namespace R3.Controllers
 
             if (userIpAddress == "::1" || userIpAddress == "173.231.116.114" || userIpAddress == "69.165.203.106")
             {
-                return RedirectToAction("MainListing","Home");
+                return RedirectToAction("Map","Home");
             }
             
             ViewBag.Message = "Parser";
