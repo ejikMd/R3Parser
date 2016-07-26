@@ -100,7 +100,7 @@ namespace R3.DataStorage
                              });
             }
 
-            SaveRealEstates(document);
+            SaveRealEstates(document);            
         }
 
         private void SaveRealEstates(List<RealEstate> realEstates)

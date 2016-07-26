@@ -28,13 +28,12 @@
                 message = message + "</br>" + item.PriceChange;
 
             var markerIcon = L.spriteIcon();
+            if (item.IsNew === true || item.PriceChange !== 0)
+                markerIcon = L.spriteIcon('red');
             if (item.Status === "Maybe")
                 markerIcon = L.spriteIcon('yellow');
             if (item.Status === "Yes")
                 markerIcon = L.spriteIcon('green');
-
-            if (item.IsNew === true || item.PriceChange !== 0)
-                markerIcon = L.spriteIcon('red');
 
 
             var marker = L.marker([item.Latitude, item.Longitude], { icon: markerIcon }).bindPopup(message);
@@ -49,15 +48,16 @@
 
     var map = L.map('map').setView([45.4656229, -73.837839], 14);
 
-    L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright" title="OpenStreetMap" target="_blank">OpenStreetMap</a> contributors | Tiles Courtesy of <a href="http://www.mapquest.com/" title="MapQuest" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" width="16" height="16">',
+    L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright" title="OpenStreetMap" target="_blank">OpenStreetMap</a>',
         subdomains: ['otile1', 'otile2', 'otile3', 'otile4']
     }).addTo(map);
 
-    L.polygon([[45.49620752, -73.86676112], [45.48040234, -73.87696756], [45.46475325, -73.89928353], [45.440067, -73.88572229], [45.42525007, -73.85344995], [45.47065226, -73.77929223],
-                [45.49072836, -73.78388576], [45.49782791, -73.81255321], [45.49575101, -73.84600907], [45.49620752, -73.86676112], [45.49620752, -73.86676112], [45.49620752, -73.86676112],
-                [45.49620752, -73.86676112], [45.49620752, -73.86676112], [45.49620752, -73.86676112], [45.49620752, -73.86676112], [45.49620752, -73.86676112], [45.49620752, -73.86676112],
-                [45.49620752, -73.86676112], [45.49620752, -73.86676112], [45.49620752, -73.86676112]]
+    L.polygon([[45.49620752476158, -73.86676112076171], [45.480402341184416, -73.87696755522353], [45.46475324875623, -73.89928353422744], [45.44006700490998, -73.88572228544814],
+        [45.425250071921845, -73.85344994658095], [45.470652263077326, -73.7792922317372], [45.51501288513557, -73.76920615049247], [45.54447547471287, -73.79821692319754],
+        [45.53052776415771, -73.8342658123577], [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171],
+        [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171],
+        [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171], [45.49620752476158, -73.86676112076171]]
             , { fill: false }).addTo(map);
 
 
