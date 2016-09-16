@@ -20,10 +20,10 @@
 	    <th nowrap ng-click="sortType = 'Bathrooms'; sortReverse = !sortReverse" style="text-align: center">
 	        Bathrooms<span ng-show="sortType == 'Bathrooms' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Bathrooms' && sortReverse" class="caret"></span>
 	    </th>
-	    <th nowrap ng-click="sortType = 'Type'; sortReverse = !sortReverse" style="text-align: center">
+@*	    <th nowrap ng-click="sortType = 'Type'; sortReverse = !sortReverse" style="text-align: center">
 	        Type<span ng-show="sortType == 'Type' && !sortReverse" class="caret caret-reversed"></span><span ng-show="sortType == 'Type' && sortReverse" class="caret"></span>
-	    </th>
-		<th style="text-align: center">ParkingType</th>
+	    </th>*@
+@*		<th style="text-align: center">ParkingType</th>*@
 		<th style="text-align: center">Address</th>
 		<th style="text-align: center">Description</th>
 	    <th nowrap ng-click="sortType = 'PriceCoefficient'; sortReverse = !sortReverse" style="text-align: center">
@@ -47,8 +47,8 @@
             <td>{{::realEstate.NeighbourhoodName}}</td>
             <td>{{::realEstate.Bedrooms}}</td>
             <td>{{::realEstate.Bathrooms}}</td>
-            <td>{{::realEstate.Type}}</td>
-            <td>{{::realEstate.ParkingType}}</td>
+@*            <td>{{::realEstate.Type}}</td>*@
+@*            <td>{{::realEstate.ParkingType}}</td>*@
             <td>{{::realEstate.AddressText}}</td>
             <td>{{::realEstate.PublicRemarks}}</td>
             <td>{{::realEstate.PriceCoefficient}}

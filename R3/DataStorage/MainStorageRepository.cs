@@ -74,7 +74,7 @@ namespace R3.DataStorage
                     //var parkingType = htmlParser.GetParkingType(details);
                 }
                 var builtinValue = "";
-                var neighbourhoodName = "";
+                var neighbourhoodName = GetNeighbourhoodName(addressText);
                 var parkingType = "";
 
                 document.Add(new RealEstate
@@ -292,5 +292,13 @@ namespace R3.DataStorage
                 return 0;
             }
         }
+
+        private string GetNeighbourhoodName(string addressText)
+        {
+            var result1 = addressText.Substring(addressText.IndexOf('|') + 1, addressText.Length - addressText.IndexOf('|') - 1);
+            var result = result1.Substring(0, result1.IndexOf(','));
+            return result;
+        }
+    
     }
 }
