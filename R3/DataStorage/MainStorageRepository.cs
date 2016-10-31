@@ -92,7 +92,7 @@ namespace R3.DataStorage
                                 AddressText = addressText,
                                 Latitude = latitude,
                                 Longitude = longitude,
-                                PublicRemarks = publicRemarks,
+                                PublicRemarks = publicRemarks.Length <= 4000 ? publicRemarks : publicRemarks.Substring(0, 4000),
                                 RelativeDetailsURL = relativeDetailsURL,
                                 AlternateURL = alternateURL,
                                 Individuals = individuals.Length <= 4000 ? individuals : individuals.Substring(0, 4000),

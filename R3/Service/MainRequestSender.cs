@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
@@ -79,12 +80,19 @@ namespace R3.Service
                           "&CurrentPage=" + currentPage +
                           "&PropertyTypeGroupID=1";
 
-            if (Request_www_realtor_ca(body, out response))
+            //if (Request_www_realtor_ca(body, out response))
+            //{
+            //    using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+            //    {
+            //        responseText = reader.ReadToEnd();
+            //    }
+
+            //    response.Close();
+            //}
+
+            if (Request_api2_realtor_ca(body, out response))
             {
-                using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
-                {
-                    responseText = reader.ReadToEnd();
-                }
+                responseText = ReadResponse(response);
 
                 response.Close();
             }
@@ -132,6 +140,70 @@ namespace R3.Service
             }
 
             return true;
+        }
+
+        private bool Request_api2_realtor_ca(string body, out HttpWebResponse response)
+        {
+            response = null;
+
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api2.realtor.ca/Listing.svc/PropertySearch_Post");
+
+                request.KeepAlive = true;
+                request.Accept = "*/*";
+                request.Headers.Add("Origin", @"https://www.realtor.ca");
+                request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36";
+                request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                request.Referer = "https://www.realtor.ca/";
+                request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate, br");
+                request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US,en;q=0.8,ru;q=0.6,ro;q=0.4");
+
+                request.Method = "POST";
+                request.ServicePoint.Expect100Continue = false;
+
+                //string body = @"CultureId=1&ApplicationId=1&RecordsPerPage=9&MaximumResults=9&PropertySearchTypeId=1&PriceMin=200000&PriceMax=500000&TransactionTypeId=2&StoreyRange=0-0&BedRange=0-0&BathRange=0-0&LongitudeMin=-73.96728019704533&LongitudeMax=-73.69554023732853&LatitudeMin=45.423068605014294&LatitudeMax=45.5228609406968&SortOrder=A&SortBy=1&PolygonPoints=-73.86676112076171+45.49620752476158%2C-73.87696755522353+45.480402341184416%2C-73.89928353422744+45.46475324875623%2C-73.88572228544814+45.44006700490998%2C-73.85344994658095+45.425250071921845%2C-73.7792922317372+45.470652263077326%2C-73.76920615049247+45.51501288513557%2C-73.79821692319754+45.54447547471287%2C-73.8342658123577+45.53052776415771%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158%2C-73.86676112076171+45.49620752476158&PolyZoomLevel=13&viewState=m&Longitude=-73.71504589999999&Latitude=45.4645503&ZoomLevel=11&CurrentPage=1&PropertyTypeGroupID=1";
+                byte[] postBytes = Encoding.UTF8.GetBytes(body);
+                request.ContentLength = postBytes.Length;
+                Stream stream = request.GetRequestStream();
+                stream.Write(postBytes, 0, postBytes.Length);
+                stream.Close();
+
+                response = (HttpWebResponse)request.GetResponse();
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
+                else return false;
+            }
+            catch (Exception)
+            {
+                if (response != null) response.Close();
+                return false;
+            }
+
+            return true;
+        }
+
+        private static string ReadResponse(HttpWebResponse response)
+        {
+            using (Stream responseStream = response.GetResponseStream())
+            {
+                Stream streamToRead = responseStream;
+                if (response.ContentEncoding.ToLower().Contains("gzip"))
+                {
+                    streamToRead = new GZipStream(streamToRead, CompressionMode.Decompress);
+                }
+                else if (response.ContentEncoding.ToLower().Contains("deflate"))
+                {
+                    streamToRead = new DeflateStream(streamToRead, CompressionMode.Decompress);
+                }
+
+                using (StreamReader streamReader = new StreamReader(streamToRead, Encoding.UTF8))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
         }
     }
 }
