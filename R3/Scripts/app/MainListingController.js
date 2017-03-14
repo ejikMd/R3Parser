@@ -1,8 +1,9 @@
-﻿R3App.controller("MainListingController", function ($scope, $filter, mainListingService, communicationsService, applicationInfo) {
+﻿R3App.controller("MainListingController", function ($scope, $filter, mainListingService, communicationsService) {
 
     $scope.listOfRealEstates = [];
     $scope.sortType = 'PriceCoefficient'; // set the default sort type
     $scope.sortReverse = true;  // set the default sort order
+    $scope.filterUpdates = true;  // set the default filter
 
     $scope.sendSatus = function (ev, record, status) {
 
@@ -17,7 +18,23 @@
         if (status === "Maybe")
             ev.target.classList.add("disabled");
     }
-   
+
+    $scope.change_with_updates = function() {
+        $scope.filterUpdates = !$scope.filterUpdates;
+    }
+
+    $scope.statusFilter = function (realEstate) {
+
+        if ($scope.filterUpdates) {
+            if (realEstate.Status != null || realEstate.IsNew || realEstate.PriceChange !== 0)
+                return realEstate;
+
+            return false;
+        }
+        return realEstate;
+    }
+
+
     function getAllRecords() {
 
         document.getElementById("loading").style.display = 'block';
