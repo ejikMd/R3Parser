@@ -13,12 +13,19 @@ namespace R3.DataStorage.LiteDB
 
         public static bool Insert(RealEstateSold realEstateSold)
         {
-            using (var db = new LiteDatabase(Path))
+            try
             {
-                var col = db.GetCollection<RealEstateSold>("soldHouses");
+                using (var db = new LiteDatabase(Path))
+                {
+                    var col = db.GetCollection<RealEstateSold>("soldHouses");
 
-                if (!col.Exists(x => x.Id.Equals(realEstateSold.Id)))
-                    col.Insert(realEstateSold);                
+                    if (!col.Exists(x => x.Id.Equals(realEstateSold.Id)))
+                        col.Insert(realEstateSold);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
 
             return true;
