@@ -11,6 +11,7 @@
                 document.getElementById("loading").style.display = 'none';
                 $scope.listOfRealEstates = listOfRealEstates;
                 populateMarkers();
+                addHeatMap();
             })
             .error(function (error) {
                 document.getElementById("loading").style.display = 'none';
@@ -44,6 +45,26 @@
 
             marker.addTo(map);
         }
+    }
+
+    function addHeatMap() {
+
+        var heatArray = [];
+        var maxPrice = 0;
+
+        for (var i = 0; i < $scope.listOfRealEstates.length; i++) {
+            var item = $scope.listOfRealEstates[i];
+            var price = parseInt(item.Price.replace(/\D/g, ''))-200000;
+
+            if (maxPrice < price) {
+                maxPrice = price;
+            }
+
+            var heatPoint = [item.Latitude, item.Longitude, price];
+            heatArray.push(heatPoint);
+        }
+
+        L.heatLayer(heatArray, { radius: 25, max: 50000 }).addTo(map);
     }
 
     var map = L.map('map').setView([45.4656229, -73.837839], 14);
