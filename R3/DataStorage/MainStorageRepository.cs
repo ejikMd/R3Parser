@@ -113,12 +113,8 @@ namespace R3.DataStorage
                 }
                 db.SaveChanges();
 
-                //sync status
-                var updateQuery = "UPDATE T SET T.[status] = OT.[status] FROM realestate T INNER JOIN RealEstateHistory OT ON T.mlsNumber = OT.mlsNumber WHERE OT.[status] is not null AND T.[status] is null";
-                db.Database.ExecuteSqlCommand(updateQuery);
-
                 //update status for old records
-                updateQuery = "UPDATE RealEstate SET STATUS = 'closed' WHERE mlsId NOT IN (SELECT mlsId FROM RealEstate WHERE dateTaken = (SELECT MAX(dateTaken) FROM RealEstate)) AND STATUS IS NULL";
+                var updateQuery = "UPDATE RealEstate SET STATUS = 'closed' WHERE mlsId NOT IN (SELECT mlsId FROM RealEstate WHERE dateTaken = (SELECT MAX(dateTaken) FROM RealEstate)) AND STATUS IS NULL";
                 db.Database.ExecuteSqlCommand(updateQuery);
 
                 //save sold records
@@ -140,6 +136,11 @@ namespace R3.DataStorage
                 //archive records
                 updateQuery = "INSERT INTO RealEstateHistory (mlsNumber, dateTaken, price, status) SELECT mlsNumber, dateTaken, price, status FROM RealEstate WHERE dateTaken not in (select max(dateTaken) from RealEstate); " +
                               "DELETE FROM RealEstate WHERE dateTaken not in (select max(dateTaken) from RealEstate);";
+                db.Database.ExecuteSqlCommand(updateQuery);
+
+                //sync status
+                updateQuery = "UPDATE T SET T.[status] = OT.[status] FROM realestate T INNER JOIN RealEstateHistory OT ON T.mlsNumber = OT.mlsNumber " +
+                              "WHERE OT.[status] is not null AND T.[status] is null AND OT.dateTaken in (select max(dateTaken) from RealEstateHistory)";
                 db.Database.ExecuteSqlCommand(updateQuery);
 
                 //clean history records
