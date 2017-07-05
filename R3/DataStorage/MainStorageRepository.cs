@@ -244,7 +244,7 @@ namespace R3.DataStorage
                 result = db.SoldRealEstates.OrderByDescending(x=>x.DateTaken).ToList();
             }
 
-            result.AddRange(LiteDbStorage.SelectAll());
+            result.AddRange(LiteDbStorage.SelectAll().Take(1000));
 
             return result;
         }
